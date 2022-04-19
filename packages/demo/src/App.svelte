@@ -17,6 +17,7 @@
   import VConsole from 'vconsole'
   import blocknativeIcon from './blocknative-icon'
   import blocknativeLogo from './blocknative-logo'
+  import blockchainComLogo from './blockchain-icon'
 
   const toHex = text =>
     text
@@ -59,7 +60,13 @@
 
   const coinbaseWallet = coinbaseModule()
 
-  const walletConnect = walletConnectModule()
+  const walletConnect = walletConnectModule({
+    moduleCustomizations: {
+      customIconSVG: blockchainComLogo,
+      customDisplayName: 'Blockchain.com'
+    }
+  })
+
   const portis = portisModule({
     apiKey: 'b2b7586f-2b1e-4c30-a7fb-c2d1533b153b'
   })
@@ -81,17 +88,17 @@
   const trezor = trezorModule(trezorOptions)
 
   const magic = magicModule({
-    apiKey: 'pk_live_02207D744E81C2BA',
-    // userEmail: 'test@test.com' 
+    apiKey: 'pk_live_02207D744E81C2BA'
+    // userEmail: 'test@test.com'
     // userEmail is optional - if user has already logged in and/or session is still active a login modal will not appear
     // for more info see the @web3-onboard/magic docs
   })
 
   const onboard = Onboard({
     wallets: [
+      walletConnect,
       ledger,
       trezor,
-      walletConnect,
       keepkey,
       keystone,
       coinbaseWallet,
@@ -181,8 +188,8 @@
 
   const signMessage = async (provider, address) => {
     const signature = await provider.request({
-      method: 'eth_sign',
-      params: [address, toHex(signMsg)]
+      method: 'personal_sign',
+      params: [toHex(signMsg), address]
     })
 
     const recoveredAddress = verifyMessage(signMsg, signature)
