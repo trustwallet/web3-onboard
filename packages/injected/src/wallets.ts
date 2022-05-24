@@ -488,7 +488,7 @@ const gameStop: InjectedWalletModule = {
     !!provider && !!provider[ProviderIdentityFlag.GameStop],
   getIcon: async () => (await import('./icons/gamestop.js')).default,
   getInterface: async () => ({
-    provider: createEIP1193Provider(window.gameStop)
+    provider: createEIP1193Provider(window.gamestop)
   }),
   platforms: ['desktop']
 }
