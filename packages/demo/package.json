@@ -37,7 +37,7 @@
     "@web3-onboard/trezor": "^2.1.0",
     "@web3-onboard/walletconnect": "^2.0.1",
     "@web3-onboard/web3auth": "^2.0.0",
-    "vconsole": "^3.9.5"
+    "vconsole": "^3.15.1"
   },
   "license": "MIT",
   "scripts": {
